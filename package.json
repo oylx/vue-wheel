@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/oylx/vue-wheel/issues"
   },
-  "homepage": "https://github.com/oylx/vue-wheel#readme"
+  "homepage": "https://github.com/oylx/vue-wheel#readme",
+  "dependencies": {
+    "vue": "^2.6.8"
+  }
 }
