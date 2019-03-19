@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>轱辘</title>
+    <title>wheel</title>
     <style>
         * {margin: 0; padding: 0; box-sizing: border-box;}
         html {
@@ -32,15 +32,21 @@
     <g-button @click="loading1=!loading1" icon="download" :loading="loading1">
         按钮
     </g-button>
-    <g-button icon="up" :loading="true">
+    <g-button icon="left" :loading="true">
         按钮
     </g-button>
-    <g-button icon="down" icon-position="right" :loading="true">
+    <g-button icon="right" icon-position="right">
         按钮
     </g-button>
-    <g-icon name="download" ></g-icon>
+    <g-icon name="download"></g-icon>
+    <g-button-group>
+        <div>1</div>
+        <g-button icon="left">上一页</g-button>
+        <g-button icon="more">更多</g-button>
+        <g-button icon="right">下一页</g-button>
+    </g-button-group>
 </div>
 <script src="./src/app.js"></script>
-<script src="//at.alicdn.com/t/font_1096226_950j3k2zx0h.js"></script>
+<script src="//at.alicdn.com/t/font_1096226_kfqzsou873f.js"></script>
 </body>
 </html>
