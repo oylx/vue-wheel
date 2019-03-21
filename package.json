@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/oylx/vue-wheel#readme",
   "dependencies": {
-    "vue": "^2.6.9",
+    "vue": "2.6.9",
     "vue-hot-reload-api": "^2.3.3"
   },
   "devDependencies": {
