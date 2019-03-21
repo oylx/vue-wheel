@@ -27,6 +27,12 @@
 </head>
 <body>
 <div id="app">
+    <div class="box">
+        <g-input value="12"></g-input>
+    </div>
+    <div class="box"><g-input value="disabled" disabled></g-input></div>
+    <div class="box"><g-input value="readonly" readonly></g-input></div>
+    <div class="box"><g-input value="error" error="密码要大于8个字符"></g-input></div>
     <g-button @click="loading1=!loading1" icon="download" :loading="loading1">
         按钮
     </g-button>

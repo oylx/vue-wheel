@@ -1,6 +1,6 @@
 {
   "name": "vue-wheel-oylx",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "vue ui frame",
   "main": "dist/index.js",
   "scripts": {
