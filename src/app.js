@@ -13,7 +13,7 @@ new Vue({
     el: "#app",
     data: {
         loading1: false,
-        message:'hi'
+        message:1
     },
     created(){
       setTimeout(()=>{
@@ -25,7 +25,7 @@ new Vue({
     },
     methods:{
         inputChange(e){
-            console.log(e.target.value)
+            console.log(e)
         }
     }
 })

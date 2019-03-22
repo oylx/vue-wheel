@@ -1,11 +1,11 @@
 <template>
     <div class="wrapper" :class="{error}">
         <input type="text" :value="value" :disabled="disabled" :readonly="readonly"
-        @change="$emit('change',$event.target.value)"
-        @input="$emit('input',$event.target.value)"
-        @focus="$emit('focus',$event.target.value)"
-        @blur="$emit('blur',$event.target.value)"
-        >
+            @change="$emit('change',$event.target.value)"
+            @input="$emit('input',$event.target.value)"
+            @focus="$emit('focus',$event.target.value)"
+            @blur="$emit('blur',$event.target.value)">
+        <!--<input type="text" :value="value" :disabled="disabled" :readonly="readonly">-->
         <template v-if="error">
             <g-icon class="icon-error" name="error"></g-icon>
             <span class="errorMessage">{{error}}</span>
@@ -21,7 +21,6 @@
         },
         props:{
             value:{
-                type:String
             },
             disabled:{
                 type:Boolean,
