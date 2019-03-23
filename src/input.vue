@@ -5,7 +5,6 @@
             @input="$emit('input',$event.target.value)"
             @focus="$emit('focus',$event.target.value)"
             @blur="$emit('blur',$event.target.value)">
-        <!--<input type="text" :value="value" :disabled="disabled" :readonly="readonly">-->
         <template v-if="error">
             <g-icon class="icon-error" name="error"></g-icon>
             <span class="errorMessage">{{error}}</span>
