@@ -3,17 +3,27 @@ import  Button from './button.vue'
 import  Icon from './icon'
 import  ButtonGroup from './button-group'
 import  Input from './input'
+import  Row from './row'
+import  Col from './col'
 
-Vue.component('g-button',Button)
-Vue.component('g-icon', Icon)
-Vue.component('g-button-group', ButtonGroup)
-Vue.component('g-input', Input)
+// Vue.component('g-button',Button)
+// Vue.component('g-icon', Icon)
+// Vue.component('g-button-group', ButtonGroup)
+// Vue.component('g-input', Input)
 
 new Vue({
     el: "#app",
     data: {
         loading1: false,
         message:1
+    },
+    components:{
+        'g-button':Button,
+        'g-icon':Icon,
+        'g-button-group': ButtonGroup,
+        'g-input':Input,
+        'g-row':Row,
+        'g-col':Col,
     },
     created(){
       setTimeout(()=>{
