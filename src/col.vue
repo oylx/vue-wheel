@@ -39,7 +39,7 @@
                 let createClasses = this.createClasses
                 let {span, offset, ipad, narrowPc, pc, widePc} = this;
                 return [
-                    ...createClasses({span, offset}),
+                    ...createClasses({span,offset}),
                     ...createClasses(ipad, 'ipad-'),
                     ...createClasses(narrowPc, 'narrow-pc-'),
                     ...createClasses(pc, 'pc-'),
@@ -60,7 +60,7 @@
                 }
                 let array=[]
                 if(obj.span){array.push(`col-${str}${obj.span}`)}
-                if(obj.offset){array.push(`col-${str}${obj.offset}`)}
+                if(obj.offset){array.push(`offset-${str}${obj.offset}`)}
                 return array
             }
         }
