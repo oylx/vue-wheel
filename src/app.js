@@ -5,6 +5,11 @@ import  ButtonGroup from './button-group'
 import  Input from './input'
 import  Row from './row'
 import  Col from './col'
+import Layout from './layout'
+import Header from './header'
+import Sider from './sider'
+import Content from './content'
+import Footer from './footer'
 
 // Vue.component('g-button',Button)
 // Vue.component('g-icon', Icon)
@@ -24,14 +29,14 @@ new Vue({
         'g-input':Input,
         'g-row':Row,
         'g-col':Col,
+        'g-layout':Layout,
+        'g-sider':Sider,
+        'g-header':Header,
+        'g-content':Content,
+        'g-footer':Footer,
     },
     created(){
-      setTimeout(()=>{
-          let event = new Event('change');
-          let inputElement = this.$el.querySelector('input');
-          inputElement.dispatchEvent(event)
-          console.log('hi')
-      },3000)
+
     },
     methods:{
         inputChange(e){
