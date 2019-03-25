@@ -4,6 +4,7 @@
   "description": "vue ui frame",
   "main": "dist/index.js",
   "scripts": {
+    "dev": "parcel --no-cache index.html",
     "dev-test": "parcel watch test/* --no-cache & karma start",
     "test": "parcel build test/* --no-cache --no-minify && karma start --single-run"
   },

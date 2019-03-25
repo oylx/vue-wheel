@@ -30,7 +30,7 @@
         }
     }
     .sider-enter-active,.sider-leave-active{
-        transition: all 3s;
+        transition: all .3s;
     }
     .sider-enter,.sider-leave-to{
         margin-left: -200px;
