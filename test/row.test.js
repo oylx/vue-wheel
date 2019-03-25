@@ -1,7 +1,7 @@
 const expect = chai.expect;
 import Vue from 'vue'
 import Row from './../src/row'
-import Col from './../src/row'
+import Col from './../src/col'
 
 Vue.config.productionTip = false
 Vue.config.devtools = false
@@ -25,7 +25,7 @@ describe('Row', () => {
         const vm = new Vue({
             el:div
         });
-        setTimeout((done)=>{
+        setTimeout(()=>{
             const row= vm.$el.querySelector('.row')
             expect(getComputedStyle(row).marginLeft).to.eq('-10px');
             expect(getComputedStyle(row).marginRight).to.eq('-10px');
