@@ -11,5 +11,6 @@
 <style lang="scss" scoped>
     .content {
         flex-grow: 1;
+        background: #fff;
     }
 </style>
