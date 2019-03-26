@@ -34,7 +34,6 @@ describe('属性',()=>{
             }
         }).$mount()
         const colElement = vm.$el
-        console.log(colElement)
         expect(colElement.classList.contains('offset-1')).to.equal(true)
         vm.$destroy()
     })
@@ -76,7 +75,6 @@ describe('属性',()=>{
             }
         }).$mount()
         const colElement = vm.$el
-        console.log(colElement.classList)
         expect(colElement.classList.contains('col-narrow-pc-1')).to.equal(true)
         expect(colElement.classList.contains('offset-narrow-pc-1')).to.equal(true)
         vm.$destroy()
@@ -91,7 +89,6 @@ describe('属性',()=>{
             }
         }).$mount()
         const colElement = vm.$el
-        console.log(colElement.classList)
         expect(colElement.classList.contains('col-ipad-1')).to.equal(true)
         expect(colElement.classList.contains('offset-ipad-1')).to.equal(true)
         vm.$destroy()

@@ -53,11 +53,11 @@ new Vue({
             this.$toast(`hi${parseInt(Math.random()*100)}`,{
                 closeButton:{
                     text:'关闭',
-                    autoClose:false,
                     callback(vm){
                         vm.log('用户说知道了')
                     },
                 },
+                autoClose:false,//false或数字，去除delay鸡肋
                 position:position,
                 enableHtml:true
             })

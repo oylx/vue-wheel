@@ -7,10 +7,9 @@
             </div>
             <div class="line" ref="line"></div>
             <span class="close" v-if="closeButton" @click="onClickClose">
-                {{closeButton.text}}
-            </span>
+        {{closeButton.text}}
+      </span>
         </div>
-
     </div>
 </template>
 <script>
@@ -19,12 +18,11 @@
         name: 'WheelToast',
         props: {
             autoClose: {
-                type: Boolean,
-                default: true
-            },
-            autoCloseDelay: {
-                type: Number,
-                default: 50
+                type: [Boolean, Number],
+                default: 5,
+                validator (value) {
+                    return value === false || typeof value === 'number';
+                }
             },
             closeButton: {
                 type: Object,
@@ -45,8 +43,6 @@
                     return ['top', 'bottom', 'middle'].indexOf(value) >= 0
                 }
             }
-        },
-        created () {
         },
         mounted () {
             this.updateStyles()
@@ -70,7 +66,7 @@
                 if (this.autoClose) {
                     setTimeout(() => {
                         this.close()
-                    }, this.autoCloseDelay * 1000)
+                    }, this.autoClose * 1000)
                 }
             },
             close () {
@@ -95,32 +91,47 @@
     $toast-min-height: 40px;
     $toast-bg: rgba(0, 0, 0, 0.75);
     @keyframes slide-up {
-        0%{
-            opacity: 0;
-            transform: translateY(100%);
-        }
-        100%{
-            opacity: 1;
-            transform: translateY(0);
-        }
+        0% {opacity: 0; transform: translateY(100%);}
+        100% {opacity: 1;transform: translateY(0%);}
     }
-    .wrapper{
+    @keyframes slide-down {
+        0% {opacity: 0; transform: translateY(-100%);}
+        100% {opacity: 1;transform: translateY(0%);}
+    }
+    @keyframes fade-in {
+        0% {opacity: 0; }
+        100% {opacity: 1;}
+    }
+    .wrapper {
         position: fixed;
         left: 50%;
         transform: translateX(-50%);
-        &.position-top{
+        $animation-duration: 300ms;
+        &.position-top {
             top: 0;
+            .toast {
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                animation: slide-down $animation-duration;
+            }
         }
-        &.position-middle{
+        &.position-bottom {
+            bottom: 0;
+            .toast {
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                animation: slide-up $animation-duration;
+            }
+        }
+        &.position-middle {
             top: 50%;
             transform: translateX(-50%) translateY(-50%);
-        }
-        &.position-bottom{
-            bottom: 0;
+            .toast {
+                animation: fade-in $animation-duration;
+            }
         }
     }
     .toast {
-        animation: slide-up 3s;
         font-size: $font-size; min-height: $toast-min-height; line-height: 1.8;
         display: flex;
         color: white; align-items: center; background: $toast-bg; border-radius: 4px;
@@ -137,6 +148,5 @@
             border-left: 1px solid #666;
             margin-left: 16px;
         }
-
     }
 </style>
