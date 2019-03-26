@@ -54,7 +54,6 @@ describe('props',()=>{
 
     })
     // it('接受 closeButton属性', () => {
-    //     const callback = sinon.fake();
     //     vm = new Constructor({
     //         propsData: {
     //             closeButton: {
@@ -68,30 +67,22 @@ describe('props',()=>{
     //     closeButton.click()
     //     expect(callback).to.have.been.called
     // })
-    it('接收closeButton属性', () => {
+    it('接收closeButton属性', (done) => {
         const callback = sinon.fake();
-        let div = document.createElement('div');
-        document.body.appendChild(div)
         vm = new Constructor({
             propsData: {
                 closeButton:{
                     text:'关闭的n次方',
-                    callback(vm){
-                        vm.log('用户说知道了')
-                    },
+                    callback
                 },
             }
-        }).$mount(div)
-        vm.$on('close', callback)
-        // vm.$on('close',()=>{})//要加done
-        let element = vm.$el.querySelector('.close')
-        expect(element.innerText).to.eq('关闭的n次方')
-        // done()
+        }).$mount()
 
-        // let closeButton = vm.$el.querySelector('.close');
-        // expect(closeButton.textContent.trim()).to.eq('关闭的n次方')
-        // closeButton.click()
-        // expect(callback).to.have.been.called
+        let button = vm.$el.querySelector('.close')
+        expect(closeButton.innerText.trim()).to.eq('关闭的n次方')
+        button.click()
+        expect(callback).to.have.been.called
+        done()
     })
 
 })
