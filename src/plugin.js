@@ -7,6 +7,7 @@ export default {
                 propsData:{
                     closeButton:toastOptions.closeButton,
                     enableHtml:toastOptions.enableHtml,
+                    position:toastOptions.position
                 }
             }:null);
             toast.$slots.default = [message];
