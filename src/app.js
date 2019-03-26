@@ -50,15 +50,16 @@ new Vue({
         showToast(){
             // this.$toast('<strong>你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗</strong>')
 
-            this.$toast('<strong>你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗</strong>',{
+            this.$toast(`hi${parseInt(Math.random()*100)}`,{
                 closeButton:{
                     text:'关闭',
+                    autoClose:false,
                     callback(vm){
                         vm.log('用户说知道了')
                     },
                 },
-                position:'middle'
-                // enableHtml:true
+                position:'middle',
+                enableHtml:true
             })
         }
     }
