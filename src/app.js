@@ -48,16 +48,17 @@ new Vue({
             console.log(e)
         },
         showToast(){
-            this.$toast('<strong>hi</strong>')
+            // this.$toast('<strong>你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗</strong>')
 
-            // this.$toast('<strong>hi</strong>',{
-            //     closeButton:{
-            //         text:'好的',
-            //         callback(vm){
-            //             vm.log('用户说知道了')
-            //         }
-            //     }
-            // })
+            this.$toast('<strong>你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗</strong>',{
+                closeButton:{
+                    text:'关闭',
+                    callback(vm){
+                        vm.log('用户说知道了')
+                    }
+                },
+                // enableHtml:true
+            })
         }
     }
 })
