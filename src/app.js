@@ -47,7 +47,7 @@ new Vue({
         inputChange(e){
             console.log(e)
         },
-        showToast(){
+        showToast({position}){
             // this.$toast('<strong>你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗</strong>')
 
             this.$toast(`hi${parseInt(Math.random()*100)}`,{
@@ -58,7 +58,7 @@ new Vue({
                         vm.log('用户说知道了')
                     },
                 },
-                position:'middle',
+                position:position,
                 enableHtml:true
             })
         }
