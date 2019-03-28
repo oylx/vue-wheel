@@ -1,6 +1,6 @@
 const expect = chai.expect;
 import Vue from 'vue'
-import Input from './../src/Input'
+import Input from './../src/input'
 
 Vue.config.productionTip = false
 Vue.config.devtools = false
@@ -56,29 +56,29 @@ describe('Props',()=>{
         expect(errorMessage.innerText).to.equal('wrong')
     })
 })
-// describe('事件',()=>{
-//     const Constructor = Vue.extend(Input);
-//     let vm;
-//     afterEach(()=>{
-//         vm.$destroy();
-//     })
-//
-//     it(`支持change/input/focus/blur事件`,()=>{
-//         ['change','input','focus','blur'].forEach(eventName=>{
-//             vm = new Constructor({}).$mount()
-//             const callback = sinon.fake();
-//             vm.$on(eventName, callback)
-//             // 触发input的各种事件
-//             let event = new Event(eventName);
-//             Object.defineProperty(
-//                 event, 'target', {
-//                     value: {value: 'hi'}, enumerable: true
-//                 }
-//             )
-//             let inputElement = vm.$el.querySelector('input')
-//             inputElement.dispatchEvent(event);
-//             expect(callback).to.have.been.calledWith('hi')
-//         })
-//     })
-//
-// })
+describe('事件',()=>{
+    const Constructor = Vue.extend(Input);
+    let vm;
+    afterEach(()=>{
+        vm.$destroy();
+    })
+
+    it(`支持change/input/focus/blur事件`,()=>{
+        ['change','input','focus','blur'].forEach(eventName=>{
+            vm = new Constructor({}).$mount()
+            const callback = sinon.fake();
+            vm.$on(eventName, callback)
+            // 触发input的各种事件
+            let event = new Event(eventName);
+            Object.defineProperty(
+                event, 'target', {
+                    value: {value: 'hi'}, enumerable: true
+                }
+            )
+            let inputElement = vm.$el.querySelector('input')
+            inputElement.dispatchEvent(event);
+            expect(callback).to.have.been.calledWith('hi')
+        })
+    })
+
+})
