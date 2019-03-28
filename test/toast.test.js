@@ -78,9 +78,9 @@ describe('props',()=>{
             }
         }).$mount()
 
-        let button = vm.$el.querySelector('.close')
+        let closeButton = vm.$el.querySelector('.close')
         expect(closeButton.innerText.trim()).to.eq('关闭的n次方')
-        button.click()
+        closeButton.click()
         expect(callback).to.have.been.called
         done()
     })
