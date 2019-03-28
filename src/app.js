@@ -19,6 +19,7 @@ import plugin from "./plugin";
 // Vue.component('g-input', Input)
 
 //用户自主选择plugin
+//
 Vue.use(plugin);
 new Vue({
     el: "#app",
