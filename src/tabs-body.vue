@@ -5,7 +5,13 @@
 </template>
 <script>
     export default {
-        name:'WheelTabsBody'
+        name:'WheelTabsBody',
+        inject:['eventBus'],
+        created() {
+            // this.eventBus.$on('update:selected',(name)=>{
+            //     console.log(name)
+            // })
+        }
     }
 </script>
 <style>

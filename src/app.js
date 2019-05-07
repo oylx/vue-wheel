@@ -16,7 +16,7 @@ import Tabs from './tabs'
 import TabsHead from './tabs-head'
 import TabsBody from './tabs-body'
 import TabsPane from './tabs-pane'
-import TabsItem from './tabs-head'
+import TabsItem from './tabs-item'
 
 // Vue.component('g-button',Button)
 // Vue.component('g-icon', Icon)
