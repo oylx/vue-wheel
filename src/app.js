@@ -11,7 +11,12 @@ import Sider from './sider'
 import Content from './content'
 import Footer from './footer'
 import Toast from './toast'
-import plugin from "./plugin";
+import plugin from "./plugin"
+import Tabs from './tabs'
+import TabsHead from './tabs-head'
+import TabsBody from './tabs-body'
+import TabsPane from './tabs-pane'
+import TabsItem from './tabs-head'
 
 // Vue.component('g-button',Button)
 // Vue.component('g-icon', Icon)
@@ -24,8 +29,7 @@ Vue.use(plugin);
 new Vue({
     el: "#app",
     data: {
-        loading1: false,
-        message:1
+        selectedTab:'movie'
     },
     components:{
         'g-button':Button,
@@ -39,7 +43,12 @@ new Vue({
         'g-header':Header,
         'g-content':Content,
         'g-footer':Footer,
-        'g-toast':Toast
+        'g-toast':Toast,
+        'g-tabs':Tabs,
+        'g-tabs-item':TabsItem,
+        'g-tabs-body':TabsBody,
+        'g-tabs-head':TabsHead,
+        'g-tabs-pane':TabsPane,
     },
     created(){
 
