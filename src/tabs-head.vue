@@ -1,7 +1,9 @@
 <template>
     <div class="tabs-head">
         <slot></slot>
-        <!--<slot name="actions"></slot>-->
+        <div class="actions-wrapper">
+            <slot name="actions"></slot>
+        </div>
     </div>
 </template>
 <script>
@@ -9,12 +11,19 @@
         name:'WheelTabsHead',
         inject:['eventBus'],
         created() {
-            // this.eventBus.$on('update:selected',(name)=>{
-            //     console.log(name)
-            // })
         }
     }
 </script>
-<style>
-
+<style scoped lang="scss">
+    $tab-height:40px;
+    .tabs-head{
+        display: flex;
+        height: $tab-height;
+        justify-content: flex-start;
+        align-items: center;
+        border: 1px solid #000;
+        > .actions-wrapper{
+            margin-left: auto;
+        }
+    }
 </style>

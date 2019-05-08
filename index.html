@@ -25,8 +25,8 @@
 </head>
 <body>
 <div id="app">
-    <!--<g-tabs @update:selected="selectedTab=$event" direction="horizontal">-->
-    <g-tabs :selected.sync="selectedTab" direction="horizontal">
+    <!--<g-tabs @update:selected="selectedTab" direction="horizontal">-->
+    <g-tabs :selected.sync="selectedTab" direction="horizontal" @click="yyy">
         <g-tabs-head class="frank">
             <template slot="actions">
                 <button>设置</button>

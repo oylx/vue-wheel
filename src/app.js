@@ -54,6 +54,9 @@ new Vue({
 
     },
     methods:{
+        yyy(data){
+          console.log(data)
+        },
         inputChange(e){
             console.log(e)
         },

@@ -1,19 +1,45 @@
 <template>
-    <div class="tabs-pane">
+    <div class="tabs-pane" :class="tabsActiveClasses" v-show="active">
         <slot></slot>
     </div>
 </template>
 <script>
     export default {
         name:'WheelTabsPane',
+        data(){
+            return{
+                active:false
+            }
+        },
+        computed:{
+            tabsActiveClasses () {
+                return {
+                    active: this.active
+                }
+            }
+        },
+        props:{
+            disabled:{
+                type:Boolean,
+                default:false
+            },
+            name: {
+                type: String | Number,
+                required: true
+            }
+        },
         inject:['eventBus'],
-        created() {
+        mounted() {
             this.eventBus.$on('update:selected',(name)=>{
-                console.log(name)
+                this.active = this.name===name
             })
         }
     }
 </script>
-<style>
-
+<style scoped lang="scss">
+    .tabs-pane{
+        &.active{
+            background:red;
+        }
+    }
 </style>

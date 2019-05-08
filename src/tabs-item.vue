@@ -1,11 +1,16 @@
 <template>
-    <div class="tabs-item" @click="xxx">
+    <div class="tabs-item" @click="xxx" :class="tabsActiveClasses">
         <slot></slot>
     </div>
 </template>
 <script>
     export default {
         name:'WheelTabsItem',
+        data(){
+          return{
+              active:false
+          }
+        },
         props:{
             disabled:{
                 type:Boolean,
@@ -16,10 +21,17 @@
                 required: true
             }
         },
+        computed: {
+            tabsActiveClasses () {
+                return {
+                    active: this.active
+                }
+            }
+        },
         inject:['eventBus'],
-        created() {
+        mounted() {
             this.eventBus.$on('update:selected',(name)=>{
-                console.log(name)
+                this.active =this.name===name
             })
         },
         methods:{
@@ -29,6 +41,11 @@
         }
     }
 </script>
-<style>
-
+<style scoped lang="scss">
+    .tabs-item{
+        padding: 0 3em;
+        &.active{
+            background: red;
+        }
+    }
 </style>
