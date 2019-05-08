@@ -36,7 +36,7 @@
         },
         methods:{
             xxx(){
-                this.eventBus.$emit('update:selected',this.name)
+                this.eventBus.$emit('update:selected',this.name,this)
             }
         }
     }
@@ -49,7 +49,7 @@
         height: 100%;
         cursor: pointer;
         &.active{
-            background: red;
+            /*background: red;*/
         }
     }
 </style>

@@ -26,7 +26,13 @@
           }
         },
         mounted() {
-            this.eventBus.$emit('update:selected',this.selected)
+            this.$children.forEach(vm=>{//vm:head body
+                vm.$children.forEach(childVm=>{//childVm:item pane
+                    if(childVm.$options.name === 'WheelTabsItem' && this.selected === childVm.name){
+                        this.eventBus.$emit('update:selected',this.selected,childVm);
+                    }
+                })
+            })
         },
         data() {
             return {
