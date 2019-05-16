@@ -1,5 +1,5 @@
 <template>
-    <div class="tabs-item" @click="xxx" :class="tabsActiveClasses">
+    <div class="tabs-item" @click="onClick" :class="tabsActiveClasses" :data-name="name">
         <slot></slot>
     </div>
 </template>
@@ -35,7 +35,7 @@
             })
         },
         methods:{
-            xxx(){
+            onClick(){
                 this.eventBus.$emit('update:selected',this.name,this)
             }
         }
