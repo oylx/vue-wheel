@@ -24,7 +24,8 @@
         computed: {
             tabsActiveClasses () {
                 return {
-                    active: this.active
+                    active: this.active,
+                    disabled: this.disabled
                 }
             }
         },
@@ -36,20 +37,30 @@
         },
         methods:{
             onClick(){
+                if (this.disabled) { return }
                 this.eventBus.$emit('update:selected',this.name,this)
+                this.$emit('click', this)
             }
         }
     }
 </script>
 <style scoped lang="scss">
-    .tabs-item{
-        padding: 0 3em;
+    $blue: blue;
+    $disabled-text-color: grey;
+    .tabs-item {
+        flex-shrink: 0;
+        padding: 0 1em;
+        cursor: pointer;
+        height: 100%;
         display: flex;
         align-items: center;
-        height: 100%;
-        cursor: pointer;
-        &.active{
-            /*background: red;*/
+        &.active {
+            color: $blue;
+            font-weight: bold;
+        }
+        &.disabled {
+            color: $disabled-text-color;
+            cursor: not-allowed;
         }
     }
 </style>
