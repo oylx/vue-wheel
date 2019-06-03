@@ -29,22 +29,23 @@
             positionContent () {
                 const {contentWrapper,triggerWrapper} = this.$refs
                 document.body.appendChild(contentWrapper)
-                let {width, height, top, left} = triggerWrapper.getBoundingClientRect();
-                if (this.position === 'top') {
-                    contentWrapper.style.left = left + window.scrollX + 'px'
-                    contentWrapper.style.top = top + window.scrollY + 'px'
-                } else if (this.position === 'bottom') {
-                    contentWrapper.style.left = left + window.scrollX + 'px'
-                    contentWrapper.style.bottom = top + window.scrollY + 'px'
-                } else if (this.position === 'left') {
-                    let {width:width1,height:height1} = contentWrapper.getBoundingClientRect();
-                    contentWrapper.style.left = left + window.scrollX-width1 + 'px'
-                    contentWrapper.style.top = top + window.scrollY+height1 + 'px'
-                } else if (this.position === 'right') {
-                    let {width:width1,height:height1} = contentWrapper.getBoundingClientRect();
-                    contentWrapper.style.left = left + window.scrollX+width+ 'px'
-                    contentWrapper.style.top = top + window.scrollY+height1  + 'px'
+                const {width, height, top, left} = triggerWrapper.getBoundingClientRect();
+                const {width:width2,height:height2} = contentWrapper.getBoundingClientRect();
+                let positions = {
+                    top: {top: top + window.scrollY, left: left + window.scrollX,},
+                    bottom: {top: top + height +height2+ window.scrollY, left: left + window.scrollX},
+                    left: {
+                        top: top + window.scrollY + height2,
+                        left: left + window.scrollX-width2
+                    },
+                    right: {
+                        top: top + window.scrollY + height2,
+                        left: left + window.scrollX + width
+                    },
                 }
+                contentWrapper.style.left = positions[this.position].left+'px'
+                contentWrapper.style.top = positions[this.position].top+'px'
+
             },
             onClickDocument (e) {
                 if (this.$refs.popover &&
