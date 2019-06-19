@@ -32,7 +32,7 @@ Vue.use(plugin);
 new Vue({
     el: "#app",
     data: {
-        selectedTab:'movie'
+        selectedTab:['2']
     },
     components:{
         'g-button':Button,

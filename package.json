@@ -4,6 +4,8 @@
   "description": "vue ui frame",
   "main": "dist/index.js",
   "scripts": {
+    "docs:dev": "vuepress dev docs ",
+    "docs:build": "vuepress build docs",
     "dev": "parcel --no-cache index.html --open",
     "dev-test": "parcel watch test/* --no-cache & karma start",
     "test": "parcel build test/* --no-cache --no-minify && karma start --single-run"
@@ -25,7 +27,8 @@
   "dependencies": {
     "vue": "2.6.9",
     "vue-hot-reload-api": "^2.3.3",
-    "vue-router": "^3.0.6"
+    "vue-router": "^3.0.6",
+    "vuepress": "^0.14.11"
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^2.6.0",
