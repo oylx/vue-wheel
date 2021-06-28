@@ -33,7 +33,7 @@ export default {
 
 <style scoped>
 .cascaderItem{
-  border: 1px solid #000;
+  border: 1px solid #ff0000;
   margin: 10px;
 }
 </style>
