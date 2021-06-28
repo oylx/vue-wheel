@@ -1,25 +1,26 @@
-import  Vue from 'vue'
-import  Button from './button.vue'
-import  Icon from './icon'
-import  ButtonGroup from './button-group'
-import  Input from './input'
-import  Row from './row'
-import  Col from './col'
-import Layout from './layout'
-import Header from './header'
-import Sider from './sider'
-import Content from './content'
-import Footer from './footer'
-import Toast from './toast'
-import plugin from "./plugin"
-import Tabs from './tabs'
-import TabsHead from './tabs-head'
-import TabsBody from './tabs-body'
-import TabsPane from './tabs-pane'
-import TabsItem from './tabs-item'
-import Popover from './popover'
-import Collapse from './collapse'
-import CollapseItem from './collapseItem'
+import Vue from 'vue';
+import Button from './button.vue';
+import Icon from './icon';
+import ButtonGroup from './button-group';
+import Input from './input';
+import Row from './row';
+import Col from './col';
+import Layout from './layout';
+import Header from './header';
+import Sider from './sider';
+import Content from './content';
+import Footer from './footer';
+import Toast from './toast';
+import plugin from './plugin';
+import Tabs from './tabs';
+import TabsHead from './tabs-head';
+import TabsBody from './tabs-body';
+import TabsPane from './tabs-pane';
+import TabsItem from './tabs-item';
+import Popover from './popover';
+import Collapse from './collapse';
+import CollapseItem from './collapseItem';
+import Cascader from './cascader';
 
 // Vue.component('g-button',Button)
 // Vue.component('g-icon', Icon)
@@ -30,55 +31,74 @@ import CollapseItem from './collapseItem'
 //
 Vue.use(plugin);
 new Vue({
-    el: "#app",
-    data: {
-        selectedTab:['2']
-    },
-    components:{
-        'g-button':Button,
-        'g-icon':Icon,
-        'g-button-group': ButtonGroup,
-        'g-input':Input,
-        'g-row':Row,
-        'g-col':Col,
-        'g-layout':Layout,
-        'g-sider':Sider,
-        'g-header':Header,
-        'g-content':Content,
-        'g-footer':Footer,
-        'g-toast':Toast,
-        'g-tabs':Tabs,
-        'g-tabs-item':TabsItem,
-        'g-tabs-body':TabsBody,
-        'g-tabs-head':TabsHead,
-        'g-tabs-pane':TabsPane,
-        'g-popover':Popover,
-        'g-collapse':Collapse,
-        'g-collapse-item':CollapseItem,
-    },
-    created(){
-
-    },
-    methods:{
-        inputChange(e){
-            console.log(e)
+  el: '#app',
+  data: {
+    source: [{
+      name: '浙江',
+      children: [
+        {
+          name: '杭州',
+          children: [{ name: '上城区' }, { name: '下城区' }, { name: '江干区区' }],
         },
-        showToast({position}){
-            // this.$toast('<strong>你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗</strong>')
+        { name: '嘉兴' },
+        { name: '湖州' }],
+    }, {
+      name: '江苏',
+      children: [
+        {
+          name: '南京',
+          children: [{ name: '宣武区' }, { name: '建邺区' }, { name: '江宁区' }],
+        },
+        { name: '镇江' },
+        { name: '常州' }],
+    }],
+  },
+  components: {
+    'g-button': Button,
+    'g-icon': Icon,
+    'g-button-group': ButtonGroup,
+    'g-input': Input,
+    'g-row': Row,
+    'g-col': Col,
+    'g-layout': Layout,
+    'g-sider': Sider,
+    'g-header': Header,
+    'g-content': Content,
+    'g-footer': Footer,
+    'g-toast': Toast,
+    'g-tabs': Tabs,
+    'g-tabs-item': TabsItem,
+    'g-tabs-body': TabsBody,
+    'g-tabs-head': TabsHead,
+    'g-tabs-pane': TabsPane,
+    'g-popover': Popover,
+    'g-collapse': Collapse,
+    'g-collapse-item': CollapseItem,
+    'g-cascader': Cascader,
+  },
+  created() {
 
-            this.$toast(`hi${parseInt(Math.random()*100)}`,{
-                closeButton:{
-                    text:'关闭',
-                    callback(vm){
-                        vm.log('用户说知道了')
-                    },
-                },
-                autoClose:false,//false或数字，去除delay鸡肋
-                position:position,
-                enableHtml:true
-            })
-        }
-    }
-})
+  },
+  methods: {
+    inputChange(e) {
+      console.log(e);
+    },
+    showToast({ position }) {
+      // this.$toast('<strong>你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗你好吗</strong>')
+
+      this.$toast(`hi${parseInt(Math.random() * 100)}`, {
+        closeButton: {
+          text: '关闭',
+          callback(vm) {
+            vm.log('用户说知道了');
+          },
+        },
+        autoClose: false,//false或数字，去除delay鸡肋
+        position: position,
+        enableHtml: true,
+      });
+    },
+  },
+});
 
 
