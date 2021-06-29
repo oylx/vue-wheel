@@ -8,7 +8,8 @@
       </div>
     </div>
     <div class="right" v-if="rightItems">
-      <cascader-items :height="height" :items="rightItems" :level="level+1" :selected="selected" @update:selected="onUpdateSelected"></cascader-items>
+      <cascader-items :height="height" :items="rightItems" :level="level+1" :selected="selected"
+                      @update:selected="onUpdateSelected"></cascader-items>
     </div>
   </div>
 </template>
@@ -38,7 +39,7 @@ export default {
   },
   computed: {
     rightItems() {
-      let currentSelected = this.selected[this.level]
+      let currentSelected = this.selected[this.level];
       if (currentSelected && currentSelected.children) {
         return currentSelected.children;
       } else {
@@ -57,11 +58,13 @@ export default {
       // 但是this.$set(this.selected, this.level, item)写法，vue不允许修改props，用下面的写法
       const copy = JSON.parse(JSON.stringify(this.selected));
       copy[this.level] = item;
+      // 如果更新了，则删掉之后的数据
+      copy.splice(this.level + 1);
       this.$emit('update:selected', copy);
     },
     onUpdateSelected(newSelected) {
-      this.$emit('update:selected',newSelected)
-    }
+      this.$emit('update:selected', newSelected);
+    },
   },
 };
 </script>
