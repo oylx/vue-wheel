@@ -1,5 +1,5 @@
 <template>
-  <cascader :source="source"></cascader>
+  <cascader :source="source" popover-height="200px"></cascader>
 </template>
 
 <script>

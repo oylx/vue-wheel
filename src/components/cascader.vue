@@ -41,23 +41,18 @@ export default {
   position: relative;
 
   .trigger {
-    border: 1px solid #f00;
     height: 32px;
     width: 100px;
+    border: 1px solid black;
   }
 
   .popover-wrapper {
     position: absolute;
     top: 100%;
     left: 0;
-    background: #ffffff;
-    box-shadow: 0 0 3px ;
-    //height: 200px;
+    background: white;
     display: flex;
     @extend .box-shadow;
-    .label {
-      white-space: nowrap;
-    }
   }
 }
 </style>

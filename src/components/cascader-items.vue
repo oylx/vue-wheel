@@ -1,11 +1,9 @@
 <template>
   <div class="cascaderItem" :style="{'height':height}">
     <div class="left">
-      <div class="label">
-        <div v-for="item in items" class="level1" @click="leftSelected = item">
-          {{ item.name }}
-          <icon class="icon" v-if="item.children" name="right"></icon>
-        </div>
+      <div class="label" v-for="item in items" @click="leftSelected = item">
+        {{ item.name }}
+        <icon class="icon" v-if="item.children" name="right"></icon>
       </div>
     </div>
     <div class="right" v-if="rightItems">
@@ -17,6 +15,7 @@
 <script>
 // template里面使用跟name相同的标签，那就是自己
 import Icon from './icon';
+
 export default {
   name: 'cascaderItems',
   components: { Icon },
@@ -26,7 +25,7 @@ export default {
     },
     height: {
       type: String,
-    }
+    },
   },
   computed: {
     rightItems() {
@@ -53,18 +52,22 @@ export default {
   align-items: flex-start;
   justify-content: flex-start;
   height: 100px;
+
   .left {
     height: 100%;
     padding: .3em 0;
   }
+
   .right {
     height: 100%;
     border-left: 1px solid $grey;
   }
+
   .label {
     padding: .3em 1em;
     display: flex;
     align-items: center;
+
     .icon {
       margin-left: 1em;
       transform: scale(0.5);
