@@ -36,6 +36,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "var";
 .cascader {
   position: relative;
 
@@ -50,10 +51,10 @@ export default {
     top: 100%;
     left: 0;
     background: #ffffff;
-    border: 2px solid green;
+    box-shadow: 0 0 3px ;
     //height: 200px;
     display: flex;
-
+    @extend .box-shadow;
     .label {
       white-space: nowrap;
     }
