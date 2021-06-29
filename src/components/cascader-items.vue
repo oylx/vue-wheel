@@ -7,6 +7,8 @@
       </div>
     </div>
     <div class="right" v-if="rightItems">
+      <!--此处不能简写 :selected.sync="selected" -->
+      <!--因为 :selected="selected" @update:selected="selected = $event" 是父接受子数据传入，这里有子数据主动传入父-->
       <cascader-items :height="height" :items="rightItems" :level="level+1" :selected="selected"
                       @update:selected="onUpdateSelected"></cascader-items>
     </div>
