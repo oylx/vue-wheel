@@ -38,19 +38,43 @@ new Vue({
       children: [
         {
           name: '杭州',
-          children: [{ name: '上城区' }, { name: '下城区' }, { name: '江干区区' }],
+          children: [
+            { name: '上城' },
+            { name: '下城' },
+            { name: '江干' },
+          ],
         },
-        { name: '嘉兴' },
-        { name: '湖州' }],
+        {
+          name: '嘉兴',
+          children: [
+            { name: '南湖' },
+            { name: '秀洲' },
+            { name: '嘉善' },
+          ],
+        },
+      ],
     }, {
-      name: '江苏',
+      name: '福建',
       children: [
         {
-          name: '南京',
-          children: [{ name: '宣武区' }, { name: '建邺区' }, { name: '江宁区' }],
+          name: '福州',
+          children: [
+            { name: '鼓楼' },
+            { name: '台江' },
+            { name: '仓山' },
+          ],
         },
-        { name: '镇江' },
-        { name: '常州' }],
+      ],
+    }, {
+      name: '安徽',
+      children: [{
+        name: '合肥',
+        children: [{
+          name: '瑶海',
+        }, {
+          name: '庐阳',
+        }],
+      }],
     }],
   },
   components: {
