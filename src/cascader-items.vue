@@ -1,5 +1,5 @@
 <template>
-  <div class="cascaderItem">
+  <div class="cascaderItem" :style="{'height':height}">
     <div class="left">
       <div class="label">
         <div v-for="item in items" class="level1" @click="leftSelected = item">
@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="right" v-if="rightItems">
-      <cascader-items :items="rightItems"></cascader-items>
+      <cascader-items :height="height" :items="rightItems"></cascader-items>
     </div>
   </div>
 </template>
@@ -21,6 +21,9 @@ export default {
     items: {
       type: Array,
     },
+    height: {
+      type: String,
+    }
   },
   computed: {
     rightItems() {
@@ -41,14 +44,18 @@ export default {
 
 <style lang="scss" scoped>
 @import "var";
+
 .cascaderItem {
-  border: 1px solid #f00;
-  margin: 10px;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  height: 100px;
+  .left {
+    border: 1px solid red;
+    height: 100%;
+  }
   .right {
-    margin-top: -1px;
+    height: 100%;
   }
 }
 </style>
