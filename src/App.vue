@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <cascader :source="source" popover-height="200px" :selected="selected"
-              @update:selected="selected = $event"></cascader>
-    <p>1234</p>
+  <div style="padding: 20px;">
+    <cascader :source="source" popover-height="200px" :selected.sync="selected"></cascader>
   </div>
 </template>
 

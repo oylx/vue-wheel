@@ -1,12 +1,12 @@
 <template>
   <div class="cascader">
     <div class="trigger" @click="popoverVisible = !popoverVisible">
-      {{ result || '&nbsp'}}
+      {{ result || '&nbsp' }}
     </div>
     <div class="popover-wrapper" v-if="popoverVisible">
       <!--      :class="[popoverClassName]" 传递props的class属性-->
-      <cascader-items class="popover" :height="popoverHeight" :items="source" :selected="selected"
-                      @update:selected="onUpdateSelected"></cascader-items>
+      <cascader-items class="popover" :height="popoverHeight" :items="source"
+                      :selected.sync="selected"></cascader-items>
     </div>
   </div>
 </template>
@@ -43,11 +43,7 @@ export default {
       popoverVisible: true, // 不要用showPopover,show是动作,函数
     };
   },
-  methods: {
-    onUpdateSelected(newSelected) {
-      this.$emit('update:selected', newSelected);
-    },
-  },
+  methods: {},
 };
 </script>
 
@@ -68,6 +64,7 @@ export default {
   }
 
   .popover-wrapper {
+    margin-top: 8px;
     position: absolute;
     top: 100%;
     left: 0;
