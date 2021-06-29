@@ -4,11 +4,9 @@
   "description": "vue ui frame",
   "main": "dist/index.js",
   "scripts": {
-    "docs:dev": "vuepress dev docs ",
-    "docs:build": "vuepress build docs",
-    "dev": "parcel --no-cache index.html --open",
-    "dev-test": "parcel watch test/* --no-cache & karma start",
-    "test": "parcel build test/* --no-cache --no-minify && karma start --single-run"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
   "repository": {
     "type": "git",
@@ -18,39 +16,36 @@
     "vue",
     "ui"
   ],
-  "author": "oylx3",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/oylx/vue-wheel/issues"
-  },
-  "homepage": "https://github.com/oylx/vue-wheel#readme",
   "dependencies": {
-    "vue": "^2.6.11",
-    "vue-hot-reload-api": "^2.3.4",
-    "vue-router": "^3.1.6"
+    "core-js": "^3.6.5",
+    "vue": "^3.0.0"
   },
   "devDependencies": {
-    "@vue/component-compiler-utils": "^3.1.2",
-    "chai": "^4.2.0",
-    "chai-spies": "^1.0.0",
-    "karma": "^5.0.5",
-    "karma-chai": "^0.1.0",
-    "karma-chai-spies": "^0.1.4",
-    "karma-chrome-launcher": "^3.1.0",
-    "karma-mocha": "^2.0.1",
-    "karma-sinon-chai": "^2.0.2",
-    "mocha": "^7.1.2",
-    "node-sass": "^4.14.1",
-    "parcel-bundler": "^1.12.4",
-    "sass": "^1.26.5",
-    "sass-loader": "^8.0.2",
-    "sinon": "^9.0.2",
-    "sinon-chai": "^3.5.0",
-    "vuepress": "^1.4.1",
-    "vue-server-renderer": "^2.6.11",
-    "vue-template-compiler": "^2.6.11"
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^7.0.0"
   },
-  "alias": {
-    "vue": "./node_modules/vue/dist/vue.common.js"
-  }
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
 }
