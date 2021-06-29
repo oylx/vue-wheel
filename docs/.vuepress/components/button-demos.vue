@@ -16,7 +16,7 @@
     </div>
 </template>
 <script>
-  import Button from '../../../src/button'
+  import Button from '@/components/button'
   export default {
     components: {
       'g-button': Button
