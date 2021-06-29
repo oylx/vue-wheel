@@ -1,8 +1,5 @@
 <template>
   <div>
-    <p>{{ selected && selected[0] && selected[0].name || '' }}</p>
-    <p>{{ selected && selected[1] && selected[1].name || '' }}</p>
-    <p>{{ selected && selected[2] && selected[0].name || '' }}</p>
     <cascader :source="source" popover-height="200px" :selected="selected"
               @update:selected="selected = $event"></cascader>
     <p>1234</p>

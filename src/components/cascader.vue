@@ -1,10 +1,12 @@
 <template>
   <div class="cascader">
     <div class="trigger" @click="popoverVisible = !popoverVisible">
+      {{ result || '&nbsp'}}
     </div>
     <div class="popover-wrapper" v-if="popoverVisible">
       <!--      :class="[popoverClassName]" 传递props的class属性-->
-      <cascader-items class="popover" :height="popoverHeight" :items="source" :selected="selected" @update:selected="onUpdateSelected"></cascader-items>
+      <cascader-items class="popover" :height="popoverHeight" :items="source" :selected="selected"
+                      @update:selected="onUpdateSelected"></cascader-items>
     </div>
   </div>
 </template>
@@ -28,8 +30,13 @@ export default {
     },
     selected: {
       type: Array,
-      default: () => { return []}
-    }
+      default: () => { return [];},
+    },
+  },
+  computed: {
+    result() {
+      return this.selected.map(v => v.name).join('/');
+    },
   },
   data() {
     return {
@@ -38,21 +45,26 @@ export default {
   },
   methods: {
     onUpdateSelected(newSelected) {
-      this.$emit('update:selected', newSelected)
-    }
-  }
+      this.$emit('update:selected', newSelected);
+    },
+  },
 };
 </script>
 
 <style scoped lang="scss">
 @import "var";
+
 .cascader {
   position: relative;
 
   .trigger {
-    height: 32px;
-    width: 100px;
+    height: $input-height;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 1em;
+    min-width: 10em;
     border: 1px solid black;
+    border-radius: $border-radius;
   }
 
   .popover-wrapper {
