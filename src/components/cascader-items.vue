@@ -1,13 +1,14 @@
 <template>
   <div class="cascaderItem" :style="{'height':height}">
     <div class="left">
-      <div class="label" v-for="item in items" @click="leftSelected = item">
+      level: {{ level }}
+      <div class="label" v-for="item in items" @click="onClickLabel(item)">
         {{ item.name }}
         <icon class="icon" v-if="item.children" name="right"></icon>
       </div>
     </div>
     <div class="right" v-if="rightItems">
-      <cascader-items :height="height" :items="rightItems"></cascader-items>
+      <cascader-items :height="height" :items="rightItems" :level="level+1" :selected="selected" @update:selected="onUpdateSelected"></cascader-items>
     </div>
   </div>
 </template>
@@ -26,11 +27,20 @@ export default {
     height: {
       type: String,
     },
+    selected: {
+      type: Array,
+      default: () => { return [];},
+    },
+    level: {
+      type: Number,
+      default: 0,
+    },
   },
   computed: {
     rightItems() {
-      if (this.leftSelected && this.leftSelected.children) {
-        return this.leftSelected.children;
+      let currentSelected = this.selected[this.level]
+      if (currentSelected && currentSelected.children) {
+        return currentSelected.children;
       } else {
         return null;
       }
@@ -40,6 +50,18 @@ export default {
     return {
       leftSelected: null,
     };
+  },
+  methods: {
+    onClickLabel(item) {
+      // 数组的操作不能直接赋值，this.selected[this.level] = item错误，只能push等API操作或者$set
+      // 但是this.$set(this.selected, this.level, item)写法，vue不允许修改props，用下面的写法
+      const copy = JSON.parse(JSON.stringify(this.selected));
+      copy[this.level] = item;
+      this.$emit('update:selected', copy);
+    },
+    onUpdateSelected(newSelected) {
+      this.$emit('update:selected',newSelected)
+    }
   },
 };
 </script>
