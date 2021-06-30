@@ -40,7 +40,7 @@ export default {
   },
   data() {
     return {
-      popoverVisible: true, // 不要用showPopover,show是动作,函数
+      popoverVisible: false, // 不要用showPopover,show是动作,函数
     };
   },
   methods: {},

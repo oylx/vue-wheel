@@ -6,6 +6,22 @@
 
 <script>
 import Cascader from '@/components/cascader';
+import db from '@/components/db';
+
+function ajax1(parentId = 0, success, fail) {
+  let id = setTimeout(() => {
+    let result = db.filter((item) => item.parent_id == parentId);
+    success(result);
+  }, 0);
+  return id;
+}
+
+function ajax2(parentId = 0) {
+  return new Promise((resolve, fail) => {
+    let result = db.filter((item) => item.parent_id == parentId);
+    resolve(result);
+  });
+}
 
 export default {
   name: 'App',
@@ -15,50 +31,16 @@ export default {
   data() {
     return {
       selected: [],
-      source: [{
-        name: '浙江',
-        children: [
-          {
-            name: '杭州',
-            children: [
-              { name: '上城' },
-              { name: '下城' },
-              { name: '江干' },
-            ],
-          },
-          {
-            name: '嘉兴',
-            children: [
-              { name: '南湖' },
-              { name: '秀洲' },
-              { name: '嘉善' },
-            ],
-          },
-        ],
-      }, {
-        name: '福建',
-        children: [
-          {
-            name: '福州',
-            children: [
-              { name: '鼓楼' },
-              { name: '台江' },
-              { name: '仓山' },
-            ],
-          },
-        ],
-      }, {
-        name: '安徽',
-        children: [{
-          name: '合肥',
-          children: [{
-            name: '瑶海',
-          }, {
-            name: '庐阳',
-          }],
-        }],
-      }],
+      source: [],
     };
+  },
+  created() {
+    // ajax1(0, (res) => {
+    //   this.source = res;
+    // });
+    ajax2().then(res => {
+      this.source = res;
+    });
   },
 };
 </script>
