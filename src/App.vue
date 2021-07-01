@@ -1,10 +1,13 @@
 <template>
   <div>
-    <p>{{ selected && selected[0] && selected[0].name || '空'}}</p>
-    <p>{{ selected && selected[1] && selected[1].name || '空'}}</p>
-    <p>{{ selected && selected[2] && selected[2].name || '空'}}</p>
+    <p>{{ selected && selected[0] && selected[0].name || '空' }}</p>
+    <p>{{ selected && selected[1] && selected[1].name || '空' }}</p>
+    <p>{{ selected && selected[2] && selected[2].name || '空' }}</p>
     <div style="padding: 20px;">
-      <cascader :source="source" popover-height="200px" :selected.sync="selected" @update:selected="xxx"></cascader>
+      <cascader :source.sync="source" popover-height="200px"
+                @update:source="onUpdateSource"
+                @update:selected="onUpdateSelected"
+                :selected.sync="selected" :load-data="loadData"></cascader>
     </div>
   </div>
 </template>
@@ -13,17 +16,12 @@
 import Cascader from '@/components/cascader';
 import db from '@/components/db';
 
-function ajax(parentId = 0, success, fail) {
-  setTimeout(() => {
-    let result = db.filter((item) => item.parent_id === parentId);
-    success(result);
-  }, 0);
-}
-
-function ajax2(parentId = 0) {
+function ajax(parentId = 0) {
   return new Promise((resolve, fail) => {
-    let result = db.filter((item) => item.parent_id === parentId);
-    resolve(result);
+    setTimeout(() => {
+      let result = db.filter((item) => item.parent_id === parentId);
+      resolve(result);
+    }, 300);
   });
 }
 
@@ -39,29 +37,36 @@ export default {
     };
   },
   created() {
-    ajax2().then(res => {
+    ajax(0).then(res => {
       this.source = res;
     });
   },
   methods: {
-    xxx() {
-      ajax2(this.selected[0].id).then(res => {
-        let lastLevelSelected = this.source.filter(item => item.id === this.selected[0].id)[0];
-        this.$set(lastLevelSelected, 'children', res);
-        console.log(this.source);
+    loadData({ id }, updateSource) {
+      ajax(id).then(result => {
+        updateSource(result); // 回调:把别人传给我的函数调用一下
       });
+    },
+    xxx() {
+      ajax(this.selected[0].id).then(result => {
+        let lastLevelSelected = this.source.filter(item => item.id === this.selected[0].id)[0];
+        this.$set(lastLevelSelected, 'children', result);
+      });
+    },
+    onUpdateSource() {
+    },
+    onUpdateSelected() {
     },
   },
 };
 </script>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  * {margin: 0; padding: 0; box-sizing: border-box;}
+  img {max-width: 100%;}
+  html {
+    --font-size: 14px;
+  }
+  body {
+    font-size: var(--font-size);
+  }
 </style>

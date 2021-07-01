@@ -9,7 +9,7 @@
     <div class="right" v-if="rightItems">
       <!--此处不能简写 :selected.sync="selected" -->
       <!--因为 :selected="selected" @update:selected="selected = $event" 是父接受子数据传入，这里有子数据主动传入父-->
-      <cascader-items :height="height" :items="rightItems" :level="level+1" :selected="selected"
+      <cascader-items ref="right"  :height="height" :items="rightItems" :level="level+1" :selected="selected"
                       @update:selected="onUpdateSelected"></cascader-items>
     </div>
   </div>
@@ -20,8 +20,8 @@
 import Icon from './icon';
 
 export default {
-  name: 'cascaderItems',
-  components: { Icon },
+  name: "CascaderItems",
+  components: {Icon},
   props: {
     items: {
       type: Array,
@@ -37,6 +37,10 @@ export default {
       type: Number,
       default: 0,
     },
+  },
+  updated () {
+    console.log('cascader items updated')
+    console.log(JSON.stringify(this.items))
   },
   computed: {
     rightItems() {
@@ -70,31 +74,26 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 @import "var";
-
 .cascaderItem {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   height: 100px;
-
   .left {
     height: 100%;
     padding: .3em 0;
     overflow: auto;
   }
-
   .right {
     height: 100%;
-    border-left: 1px solid $grey;
+    border-left: 1px solid $border-color-light;
   }
-
   .label {
     padding: .3em 1em;
     display: flex;
     align-items: center;
-
     .icon {
       margin-left: 1em;
       transform: scale(0.5);

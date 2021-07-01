@@ -31,12 +31,10 @@ export default {
     },
     selected: {
       type: Array,
-      default: () => { return [];},
+      default: () => {return [];},
     },
-  },
-  computed: {
-    result() {
-      return this.selected.map(v => v.name).join('/');
+    loadData: {
+      type: Function,
     },
   },
   data() {
@@ -47,6 +45,51 @@ export default {
   methods: {
     onUpdateSelected(newSelected) {
       this.$emit('update:selected', newSelected);
+      let lastItem = newSelected[newSelected.length - 1];
+      let simplest = (children, id) => {
+        return children.filter(item => item.id === id)[0];
+      };
+      let complex = (children, id) => {
+        let noChildren = [];
+        let hasChildren = [];
+        children.forEach(item => {
+          if (item.children) {
+            hasChildren.push(item);
+          } else {
+            noChildren.push(item);
+          }
+        });
+        let found = simplest(noChildren, id);
+        if (found) {
+          return found;
+        } else {
+          found = simplest(hasChildren, id);
+          if (found) {
+            return found;
+          } else {
+            for (let i = 0; i < hasChildren.length; i++) {
+              found = complex(hasChildren[i].children, id);
+              if (found) {
+                return found;
+              }
+            }
+            return undefined;
+          }
+        }
+      };
+      let updateSource = (result) => {
+        let copy = JSON.parse(JSON.stringify(this.source));
+        let toUpdate = complex(copy, lastItem.id);
+        toUpdate.children = result;
+        this.$emit('update:source', copy);
+      };
+      this.loadData(lastItem, updateSource); // 回调:把别人传给我的函数调用一下
+      // 调回调的时候传一个函数,这个函数理论应该被调用
+    },
+  },
+  computed: {
+    result() {
+      return this.selected.map((item) => item.name).join('/');
     },
   },
 };
@@ -64,17 +107,17 @@ export default {
     align-items: center;
     padding: 0 1em;
     min-width: 10em;
-    border: 1px solid black;
+    border: 1px solid $border-color;
     border-radius: $border-radius;
   }
 
   .popover-wrapper {
-    margin-top: 8px;
     position: absolute;
     top: 100%;
     left: 0;
     background: white;
     display: flex;
+    margin-top: 8px;
     @extend .box-shadow;
   }
 }
