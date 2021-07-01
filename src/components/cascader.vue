@@ -6,7 +6,8 @@
     <div class="popover-wrapper" v-if="popoverVisible">
       <!--      :class="[popoverClassName]" 传递props的class属性-->
       <cascader-items class="popover" :height="popoverHeight" :items="source"
-                      :selected.sync="selected"></cascader-items>
+                      :selected="selected"
+                      @update:selected="onUpdateSelected"></cascader-items>
     </div>
   </div>
 </template>
@@ -43,7 +44,11 @@ export default {
       popoverVisible: false, // 不要用showPopover,show是动作,函数
     };
   },
-  methods: {},
+  methods: {
+    onUpdateSelected(newSelected) {
+      this.$emit('update:selected', newSelected);
+    },
+  },
 };
 </script>
 
