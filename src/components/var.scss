@@ -18,3 +18,7 @@ $tab-height: 40px;
 }
 $border-color-light: lighten($border-color, 30%);
 $grey: #eee;
+@keyframes spin {
+ 0% { transform: rotate(0deg); }
+ 100% { transform: rotate(360deg); }
+}

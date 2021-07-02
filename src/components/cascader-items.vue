@@ -3,13 +3,21 @@
     <div class="left">
       <div class="label" v-for="item in items" @click="onClickLabel(item)">
         <span class="name">{{ item.name }}</span>
-        <icon class="icon" v-if="rightArrowVisible(item)" name="right"></icon>
+        <span class="icons">
+          <template v-if="item.name === loadingItem.name">
+            <icon class="loading" name="loading"></icon>
+          </template>
+          <template v-else>
+            <icon class="next" v-if="rightArrowVisible(item)" name="right"></icon>
+          </template>
+        </span>
       </div>
     </div>
     <div class="right" v-if="rightItems">
       <!--此处不能简写 :selected.sync="selected" -->
       <!--因为 :selected="selected" @update:selected="selected = $event" 是父接受子数据传入，这里有子数据主动传入父-->
-      <cascader-items ref="right" :height="height" :items="rightItems" :level="level+1" :selected="selected"
+      <cascader-items :loading-item="loadingItem"
+                      :load-data="loadData" ref="right" :height="height" :items="rightItems" :level="level+1" :selected="selected"
                       @update:selected="onUpdateSelected"></cascader-items>
     </div>
   </div>
@@ -40,10 +48,12 @@ export default {
       type: Number,
       default: 0,
     },
+    loadingItem: {
+      type: Object,
+      default: () => ({})
+    },
   },
   updated() {
-    console.log('cascader items updated');
-    console.log(JSON.stringify(this.items));
   },
   computed: {
     rightItems() {
@@ -117,9 +127,14 @@ export default {
     display: flex;
     align-items: center;
 
-    .icon {
+    .icons {
       margin-left: auto;
-      transform: scale(0.5);
+      .next {
+        transform: scale(0.5);
+      }
+      .loading {
+        animation: spin 2s infinite linear;
+      }
     }
   }
 }

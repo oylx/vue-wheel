@@ -9,6 +9,7 @@
       <!--      :class="[popoverClassName]" 传递props的class属性-->
       <cascader-items class="popover" :height="popoverHeight" :items="source" :loadData="loadData"
                       :selected="selected"
+                      :loading-item="loadingItem"
                       @update:selected="onUpdateSelected"></cascader-items>
     </div>
   </div>
@@ -44,6 +45,7 @@ export default {
   data() {
     return {
       popoverVisible: false, // 不要用showPopover,show是动作,函数
+      loadingItem: {},
     };
   },
   methods: {
@@ -95,14 +97,16 @@ export default {
         }
       };
       let updateSource = (result) => {
+        this.loadingItem = {}
         let copy = JSON.parse(JSON.stringify(this.source));
         let toUpdate = complex(copy, lastItem.id);
         toUpdate.children = result;
         this.$emit('update:source', copy);
       };
-      if (!lastItem.isLeaf) {
-        this.loadData && this.loadData(lastItem, updateSource); // 回调:把别人传给我的函数调用一下
+      if (!lastItem.isLeaf && this.loadData) {
+        this.loadData(lastItem, updateSource) // 回调:把别人传给我的函数调用一下
         // 调回调的时候传一个函数,这个函数理论应该被调用
+        this.loadingItem = lastItem
       }
     },
   },
@@ -122,6 +126,7 @@ export default {
   display: inline-block;
 
   .trigger {
+    background: white;
     height: $input-height;
     display: inline-flex;
     align-items: center;
@@ -133,6 +138,7 @@ export default {
 
   .popover-wrapper {
     position: absolute;
+    z-index: 1;
     top: 100%;
     left: 0;
     background: white;
