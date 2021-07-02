@@ -1,5 +1,5 @@
 <template>
-  <div class="cascader">
+  <div class="cascader" ref="cascader" v-click-outside="close">
     <div class="cascader" ref="cascader">
       <div class="trigger" @click="toggle">
         {{ result || '&nbsp' }}
@@ -17,12 +17,14 @@
 <script>
 
 import CascaderItems from './cascader-items';
+import ClickOutside from './click-outside';
 
 export default {
   name: 'Cascader',
   components: {
     CascaderItems,
   },
+  directives: { ClickOutside },
   props: {
     // 属性不要以data开头,eg: dataSource
     source: {
@@ -54,19 +56,9 @@ export default {
     },
     open() {
       this.popoverVisible = true;
-      this.$nextTick(() => {
-        document.addEventListener('click', this.onClickDocument);
-      });
     },
     close() {
       this.popoverVisible = false;
-      document.removeEventListener('click', this.onClickDocument);
-    },
-    onClickDocument(e) {
-      const { target } = e;
-      const cascader = this.$refs.cascader;
-      if (cascader === target || cascader.contains(target)) return;
-      this.close();
     },
     onUpdateSelected(newSelected) {
       this.$emit('update:selected', newSelected);
@@ -127,6 +119,7 @@ export default {
 
 .cascader {
   position: relative;
+  display: inline-block;
 
   .trigger {
     height: $input-height;
