@@ -1,7 +1,9 @@
 <template>
   <div class="cascader">
-    <div class="trigger" @click="popoverVisible = !popoverVisible">
-      {{ result || '&nbsp' }}
+    <div class="cascader" ref="cascader">
+      <div class="trigger" @click="toggle">
+        {{ result || '&nbsp' }}
+      </div>
     </div>
     <div class="popover-wrapper" v-if="popoverVisible">
       <!--      :class="[popoverClassName]" 传递props的class属性-->
@@ -43,6 +45,29 @@ export default {
     };
   },
   methods: {
+    toggle() {
+      if (this.popoverVisible) {
+        this.close();
+      } else {
+        this.open();
+      }
+    },
+    open() {
+      this.popoverVisible = true;
+      this.$nextTick(() => {
+        document.addEventListener('click', this.onClickDocument);
+      });
+    },
+    close() {
+      this.popoverVisible = false;
+      document.removeEventListener('click', this.onClickDocument);
+    },
+    onClickDocument(e) {
+      const { target } = e;
+      const cascader = this.$refs.cascader;
+      if (cascader === target || cascader.contains(target)) return;
+      this.close();
+    },
     onUpdateSelected(newSelected) {
       this.$emit('update:selected', newSelected);
       let lastItem = newSelected[newSelected.length - 1];

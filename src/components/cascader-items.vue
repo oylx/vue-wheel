@@ -103,6 +103,7 @@ export default {
   .label {
     padding: .5em 1em;
     cursor: pointer;
+    white-space: nowrap;
 
     &:hover {
       background: $grey;
