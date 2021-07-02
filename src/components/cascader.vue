@@ -5,7 +5,7 @@
     </div>
     <div class="popover-wrapper" v-if="popoverVisible">
       <!--      :class="[popoverClassName]" 传递props的class属性-->
-      <cascader-items class="popover" :height="popoverHeight" :items="source"
+      <cascader-items class="popover" :height="popoverHeight" :items="source" :loadData="loadData"
                       :selected="selected"
                       @update:selected="onUpdateSelected"></cascader-items>
     </div>
@@ -83,8 +83,10 @@ export default {
         toUpdate.children = result;
         this.$emit('update:source', copy);
       };
-      this.loadData(lastItem, updateSource); // 回调:把别人传给我的函数调用一下
-      // 调回调的时候传一个函数,这个函数理论应该被调用
+      if (!lastItem.isLeaf) {
+        this.loadData && this.loadData(lastItem, updateSource); // 回调:把别人传给我的函数调用一下
+        // 调回调的时候传一个函数,这个函数理论应该被调用
+      }
     },
   },
   computed: {

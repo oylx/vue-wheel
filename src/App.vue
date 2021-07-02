@@ -20,6 +20,9 @@ function ajax(parentId = 0) {
   return new Promise((resolve, fail) => {
     setTimeout(() => {
       let result = db.filter((item) => item.parent_id === parentId);
+      result.forEach(node => {
+        node.isLeaf = db.filter(item => item.parent_id === node.id).length <= 0;
+      });
       resolve(result);
     }, 300);
   });
@@ -47,12 +50,6 @@ export default {
         updateSource(result); // 回调:把别人传给我的函数调用一下
       });
     },
-    xxx() {
-      ajax(this.selected[0].id).then(result => {
-        let lastLevelSelected = this.source.filter(item => item.id === this.selected[0].id)[0];
-        this.$set(lastLevelSelected, 'children', result);
-      });
-    },
     onUpdateSource() {
     },
     onUpdateSelected() {
@@ -61,12 +58,12 @@ export default {
 };
 </script>
 <style>
-  * {margin: 0; padding: 0; box-sizing: border-box;}
-  img {max-width: 100%;}
-  html {
-    --font-size: 14px;
-  }
-  body {
-    font-size: var(--font-size);
-  }
+* {margin: 0; padding: 0; box-sizing: border-box;}
+img {max-width: 100%;}
+html {
+  --font-size: 14px;
+}
+body {
+  font-size: var(--font-size);
+}
 </style>

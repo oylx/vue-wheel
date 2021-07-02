@@ -2,14 +2,14 @@
   <div class="cascaderItem" :style="{'height':height}">
     <div class="left">
       <div class="label" v-for="item in items" @click="onClickLabel(item)">
-        {{ item.name }}
-        <icon class="icon" v-if="item.children" name="right"></icon>
+        <span class="name">{{ item.name }}</span>
+        <icon class="icon" v-if="rightArrowVisible(item)" name="right"></icon>
       </div>
     </div>
     <div class="right" v-if="rightItems">
       <!--此处不能简写 :selected.sync="selected" -->
       <!--因为 :selected="selected" @update:selected="selected = $event" 是父接受子数据传入，这里有子数据主动传入父-->
-      <cascader-items ref="right"  :height="height" :items="rightItems" :level="level+1" :selected="selected"
+      <cascader-items ref="right" :height="height" :items="rightItems" :level="level+1" :selected="selected"
                       @update:selected="onUpdateSelected"></cascader-items>
     </div>
   </div>
@@ -20,8 +20,8 @@
 import Icon from './icon';
 
 export default {
-  name: "CascaderItems",
-  components: {Icon},
+  name: 'CascaderItems',
+  components: { Icon },
   props: {
     items: {
       type: Array,
@@ -33,22 +33,25 @@ export default {
       type: Array,
       default: () => { return [];},
     },
+    loadData: {
+      type: Function,
+    },
     level: {
       type: Number,
       default: 0,
     },
   },
-  updated () {
-    console.log('cascader items updated')
-    console.log(JSON.stringify(this.items))
+  updated() {
+    console.log('cascader items updated');
+    console.log(JSON.stringify(this.items));
   },
   computed: {
     rightItems() {
-      let currentSelected = this.selected[this.level];
-      if (currentSelected && currentSelected.children) {
-        return currentSelected.children;
-      } else {
-        return null;
+      if (this.selected[this.level]) {
+        let selected = this.items.filter((item) => item.name === this.selected[this.level].name);
+        if (selected && selected[0].children && selected[0].children.length > 0) {
+          return selected[0].children;
+        }
       }
     },
   },
@@ -58,6 +61,9 @@ export default {
     };
   },
   methods: {
+    rightArrowVisible(item) {
+      return this.loadData ? !item.isLeaf : item.children;
+    },
     onClickLabel(item) {
       // 数组的操作不能直接赋值，this.selected[this.level] = item错误，只能push等API操作或者$set
       // 但是this.$set(this.selected, this.level, item)写法，vue不允许修改props，用下面的写法
@@ -76,26 +82,42 @@ export default {
 
 <style scoped lang="scss">
 @import "var";
+
 .cascaderItem {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   height: 100px;
+
   .left {
     height: 100%;
     padding: .3em 0;
     overflow: auto;
   }
+
   .right {
     height: 100%;
     border-left: 1px solid $border-color-light;
   }
+
   .label {
-    padding: .3em 1em;
+    padding: .5em 1em;
+    cursor: pointer;
+
+    &:hover {
+      background: $grey;
+    }
+
+    > .name {
+      margin-right: 1em;
+      user-select: none;
+    }
+
     display: flex;
     align-items: center;
+
     .icon {
-      margin-left: 1em;
+      margin-left: auto;
       transform: scale(0.5);
     }
   }
